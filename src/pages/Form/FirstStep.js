@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 // import SecondStep from "../pages/SecondStep";
 import { useFormContext, Controller } from "react-hook-form";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
@@ -111,11 +111,12 @@ function FirstStep(props) {
   const month = newDate.getMonth();
   const day = newDate.getDate();
   const hour = newDate.getHours();
+  const seconds = newDate.getSeconds();
+  const minutes = newDate.getMinutes();
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-
   // Date Picker Add +- 1 year
   // Time +-1
 
@@ -178,6 +179,10 @@ function FirstStep(props) {
                   value={value}
                   sx={{ m: 2 }}
                   onChange={handleChange}
+                  openTo="hours"
+                  views={["hours", "minutes", "seconds"]}
+                  inputFormat="HH:mm:ss"
+                  mask="__:__:__"
                   minTime={new Date(year, month, day, hour - 2)}
                   maxTime={new Date(year, month, day, hour + 2)}
                   renderInput={(params) => <TextField {...params} />}
